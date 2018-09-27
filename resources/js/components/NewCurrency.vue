@@ -39,7 +39,7 @@
 
             <v-flex xs12>
                 <v-btn
-                color="blue"
+                color="blue white--text"
                 :disabled="!valid"
                 @click="submit">Store</v-btn>
             </v-flex>

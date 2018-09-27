@@ -108,7 +108,7 @@ class CurrencyController extends ApiController
         if (!$currency) {
             return $this->errorResponse('Currency was not found', 404);
         }
-
+        
         # validation
         $this->validate($request, 
             // rules
