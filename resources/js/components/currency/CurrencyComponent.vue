@@ -129,10 +129,30 @@ export default {
 
 				if (res.status == 200) {
 					this.$emit('refreshNavCurrencies');
+
+					// disable status messages
+                    this.errors.abbreviation.status = false;
+                    this.errors.currency.status = false;
 				}
 			})
 			.catch(error => {
 				console.log(error.response);
+
+				let errors = error.response.data.errors;
+
+                // generate alerts for each error
+                if (errors.abbreviation) {
+                    this.errors.abbreviation.status = true;
+                    this.errors.abbreviation.text   = errors.abbreviation[0];
+                } else {
+                    this.errors.abbreviation.status = false;
+                }
+                if (errors.currency) {
+                    this.errors.currency.status = true;
+                    this.errors.currency.text   = errors.currency[0];
+                } else {
+                    this.errors.currency.status = false;
+                }
 
 				this.loadCurrency();
 			});
