@@ -40,7 +40,7 @@ class ApiController extends Controller
 
 	/**
 	*	Returns a collection of items
-	*	If collection is empty, it will just return that empty object
+	*	If collection is empty, it will just return an empty object
 	*	Else
 	*		It will obtain the transformer (used to change the name of columns)
 	*		Filter Data if necessary by using query parameters
@@ -48,6 +48,7 @@ class ApiController extends Controller
 	*		Paginate Data
 	*		Transform Data, thus changing the columns name
 	*	Finally, we will return that collection to the success response function
+	*
 	* @param collection
 	* @param code
 	*/

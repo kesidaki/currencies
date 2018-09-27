@@ -14,9 +14,6 @@ class ConverterController extends ApiController
 	public $currency;
 	public $ratio;
 
-	/**
-	* Constructor
-	*/
 	public function __construct(CurrencyRepository $currencyRepository, CurrencyRatioRepository $currencyRatioRepository) 
 	{
 		$this->currency = $currencyRepository;

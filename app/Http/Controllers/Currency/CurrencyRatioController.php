@@ -13,9 +13,6 @@ class CurrencyRatioController extends ApiController
     public $currency;
     public $ratio;
 
-    /**
-    * Constructor
-    */
     public function __construct(CurrencyRepository $currencyRepository, 
                                 CurrencyRatioRepository $currencyRatioRepository) 
     {
@@ -24,7 +21,7 @@ class CurrencyRatioController extends ApiController
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of Currency Rates.
      *
      * @param int id
      * @return \Illuminate\Http\Response
@@ -83,11 +80,11 @@ class CurrencyRatioController extends ApiController
         ];
         $newData = Sanitizer::make($data, $filters)->sanitize();
 
-        # Create to keep records of previous rates
-        # Needs fixing because get query returns earliest entry instead of latest 
-        # store given rate
+        // # Create and keep records of previous rates, to keep track of changes
+        // # Needs fixing because GET query returns first entry instead of latest 
+        // # store given rate
         // $this->ratio->create($newData);
-        # store reversed rate
+        // # store reversed rate
         // $this->ratio->create([
         //     'base_currency_id'   => $newData['target_currency_id'],
         //     'target_currency_id' => $newData['base_currency_id'],
@@ -109,7 +106,7 @@ class CurrencyRatioController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Rate.
      *
      * @param  int baseId
      * @param  int targetId

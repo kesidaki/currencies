@@ -11,9 +11,6 @@ class RatesController extends ApiController
 {
     public $ratio;
 
-    /**
-    * Constructor
-    */
     public function __construct(CurrencyRatioRepository $currencyRatioRepository) 
     {
         $this->ratio = $currencyRatioRepository;

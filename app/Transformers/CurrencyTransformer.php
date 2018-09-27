@@ -19,7 +19,7 @@ class CurrencyTransformer extends TransformerAbstract
             'currency' => (string) $currency->name,
             'abbreviation' => (string) $currency->code,
             'sign' => (string) $currency->symbol,
-            'img' => public_path($currency->icon)
+            'img' => ($currency->icon == '') ? public_path('\icons\currency.png') : public_path($currency->icon)
         ];
     }
 }

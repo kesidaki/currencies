@@ -12,16 +12,13 @@ class CurrencyController extends ApiController
 {
     public $currency;
 
-    /**
-    * Constructor
-    */
     public function __construct(CurrencyRepository $currensyRepository) 
     {
         $this->currency = $currensyRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of Currencies.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +29,7 @@ class CurrencyController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created currency.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,7 +43,7 @@ class CurrencyController extends ApiController
                 'currency'      => 'required|min:4|unique:currencies,name',
                 'abbreviation'  => 'required|min:3|unique:currencies,code'
             ],
-            // message
+            // messages
             [
                 'currency.required'     => 'Currency Name is required',
                 'currency.min'          => 'Currency must be at least :min characters long',
@@ -73,9 +70,6 @@ class CurrencyController extends ApiController
 
         $newData = Sanitizer::make($data, $filters)->sanitize();
 
-        # image placeholder
-        $newData['icon'] = '\icons\currency.png';
-
         # store data
         $currency = $this->currency->create($newData);
 
@@ -83,7 +77,7 @@ class CurrencyController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified currency.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -104,6 +98,7 @@ class CurrencyController extends ApiController
      */
     public function update(Request $request, $id)
     {
+        # get currency if exists
         $currency = $this->currency->find($id);
         if (!$currency) {
             return $this->errorResponse('Currency was not found', 404);
@@ -140,15 +135,6 @@ class CurrencyController extends ApiController
         ];
 
         $newData = Sanitizer::make($data, $filters)->sanitize();
-
-        # upload image
-        if ($request->hasFile('image')) {
-            if ($currency->icon != '') {
-                Storage::delete($currency->icon);
-            }
-
-            $newData['icon'] = $request->image->store('icons');
-        }
 
         # store data
         $this->currency->update($newData, $id);
